@@ -35,9 +35,8 @@ public class Solution {
 	public List<List<Integer>> binaryTreePathSum(TreeNode root, int target) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		List<Integer> path = new ArrayList<Integer>();
-		path.add(root.getVal());
-		Integer currentSum = root.getVal();
+		Integer currentSum = 0;
 		this.currentSum(root, result, path, currentSum, target);
-		return null;
+		return result;
 	}
 }
