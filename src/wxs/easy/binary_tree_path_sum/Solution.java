@@ -10,25 +10,26 @@ public class Solution {
 			int currentSum, 
 			int target) {
 		boolean isRightPath = false;
-		path.add(node.getVal());
-		currentSum += node.getVal();
-		if (currentSum == target) {
+		if (node != null) {
+			path.add(node.getVal());
+			currentSum += node.getVal();
 			if (node.getLeft() == null && node.getRight() == null) {
-				pathList.add(path);
-				isRightPath = true;
+				if (currentSum == target) {
+					pathList.add(path);
+					isRightPath = true;
+				} else {
+					isRightPath = false;
+				}
 			} else {
-				isRightPath = false;
+				List<Integer> copiedPath = new ArrayList<Integer>(path);
+				if (node.getLeft() != null) {
+					currentSum(node.getLeft(), pathList, path, currentSum, target);
+				}
+				if (node.getRight() != null) {
+					currentSum(node.getRight(), pathList, copiedPath, currentSum, target);
+				}
 			}
-		} else if (currentSum < target) {
-			if (node.getLeft() != null) {
-				currentSum(node.getLeft(), pathList, path, currentSum, target);
-			} else if (node.getRight() != null) {
-				currentSum(node.getRight(), pathList, path, currentSum, target);
-			}
-		} else {
-			return false;
 		}
-		
 		return isRightPath;
 	}
 	
